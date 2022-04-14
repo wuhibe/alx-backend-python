@@ -4,7 +4,7 @@ import typing
 
 
 def safe_first_element(lst: typing.Sequence[typing.Any]) -> typing.Union[
-        typing.Any, NoneType]:
+        typing.Any, None]:
     ''' function with correct duck-typed annotations '''
     if lst:
         return lst[0]

@@ -13,7 +13,7 @@ def zoom_array(lst: typing.List, factor: typing.Union[float, int] =
     return zoomed_in
 
 
-array = [12, 72, 91, 13, 45, 23, 76, 23, 75]
+array = [12, 72, 91]
 
 zoom_2x = zoom_array(array)
 

@@ -4,7 +4,7 @@ import random
 import asyncio
 
 
-async def wait_random(max_delay: int = 10):
+async def wait_random(max_delay: float = 10):
     ''' function that waits a random time b/n 0 and max_delay
     and returns the wait time '''
     r: float = random.uniform(0, max_delay)

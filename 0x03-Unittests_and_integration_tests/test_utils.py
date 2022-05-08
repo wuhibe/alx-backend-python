@@ -4,6 +4,7 @@ import unittest
 from unittest.mock import patch
 from parameterized import parameterized
 import utils
+memoize = utils.memoize
 
 
 class TestAccessNestedMap(unittest.TestCase):
@@ -38,3 +39,25 @@ class TestGetJson(unittest.TestCase):
         """ test for get method with patched return """
         patch.return_value = payload
         self.assertEqual(utils.get_json(url), payload)
+
+
+class TestMemoize(unittest.TestCase):
+    """ Test class for memoize """
+    def test_memoize(self):
+        """ test if the return value of a method is memoized
+        i.e. stored for future access """
+        class TestClass:
+            """ Test class """
+            def a_method(self):
+                """ a method """
+                return 42
+
+            @memoize
+            def a_property(self):
+                """ memoize method's return """
+                return self.a_method()
+        with patch.object(TestClass, "a_method") as pMethod:
+            test_class = TestClass()
+            test_class.a_property
+            test_class.a_property
+            pMethod.assert_called_once

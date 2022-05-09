@@ -31,3 +31,17 @@ class TestGithubOrgClient(unittest.TestCase):
             test_return = test_client._public_repos_url
             self.assertEqual(test_return, kp)
             mock.assert_called_once
+
+    @patch("client.get_json")
+    def test_public_repos(self, mock):
+        """ to unit-test GithubOrgClient.public_repos """
+        mock.return_value = [{"name": "holberton"}]
+        with patch.object(GithubOrgClient,
+                          "_public_repos_url",
+                          new_callable=PropertyMock,
+                          return_value="https://api.github.com/") as mock_pub:
+            test_client = GithubOrgClient("hoberton")
+            test_return = test_client.public_repos()
+            self.assertEqual(test_return, ["holberton"])
+            mock.assert_called_once
+            mock_pub.assert_called_once
